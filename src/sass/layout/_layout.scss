@@ -1,0 +1,22 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+#container {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+#main-content {
+  flex: 1;
+}

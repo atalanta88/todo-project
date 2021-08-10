@@ -1,0 +1,102 @@
+h1 {
+  color: teal;
+}
+
+.text-center {
+  color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+html,
+body,
+div,
+span,
+a,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+img,
+ol,
+ul,
+li,
+input,
+label,
+select,
+table,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+footer,
+header,
+menu,
+nav,
+section,
+video {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 0;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: relative;
+}
+
+#container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  min-height: 100vh;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+#main-content {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.footer {
+  background-color: #1f1f1f;
+  -ms-flex-negative: 1;
+      flex-shrink: 1;
+  padding-top: 1rem;
+  bottom: 0px;
+  overflow: hidden;
+  position: relative;
+}
+/*# sourceMappingURL=style.css.map */
