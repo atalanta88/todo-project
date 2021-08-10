@@ -3,13 +3,6 @@ import { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
-import IconButton from "@material-ui/core/IconButton";
-import InputLabel from "@material-ui/core/InputLabel";
-import Visibility from "@material-ui/icons/Visibility";
-import InputAdornment from "@material-ui/core/InputAdornment";
-import VisibilityOff from "@material-ui/icons/VisibilityOff";
-import Input from "@material-ui/core/Input";
-
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
@@ -63,23 +56,6 @@ export default function LoginForm() {
     }
   }
 
-  const [values, setValues] = React.useState({
-    password: "",
-    showPassword: false,
-  });
-
-  const handleClickShowPassword = () => {
-    setValues({ ...values, showPassword: !values.showPassword });
-  };
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
-
-  const handlePasswordChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
-  };
-
   return (
     <>
       <Container className="login-container">
@@ -100,27 +76,10 @@ export default function LoginForm() {
               <Form.Label>Password</Form.Label>
               <Form.Group controlId="formBasicPassword">
                 <Form.Control
-                  type={values.showPassword ? "text" : "password"}
-                  onChange={handlePasswordChange("password")}
-                  value={values.password}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
-                      >
-                        {values.showPassword ? (
-                          <Visibility />
-                        ) : (
-                          <VisibilityOff />
-                        )}
-                      </IconButton>
-                    </InputAdornment>
-                  }
+                  type="password"
                   name="password"
                   ref={register}
                 ></Form.Control>
-
                 {errors.password && (
                   <FormError>{errors.password.message}</FormError>
                 )}

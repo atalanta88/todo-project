@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import * as Icon from "react-bootstrap-icons";
 
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
@@ -11,34 +12,18 @@ import Form from "react-bootstrap/Form";
 
 import FormError from "../../common/FormError";
 import axios from "axios";
-import AuthContext from "../../../../context/AuthContext";
+import AuthContext from "../../context/AuthContext";
 import { TODO_LIST } from "../../constants/api";
 
 const schema = yup.object().shape({
-  name: yup
+  Title: yup
     .string()
-    .required("Enter the housing name")
-    .min(3, "Housing name needs to be atleast 3 characters"),
-  adress: yup
-    .string()
-    .required("Enter the housing adress")
-    .min(5, "Housing adress needs to be atleast 5 characters"),
+    .required("Enter the title")
+    .min(3, "Title needs to be atleast 3 characters"),
 
-  type: yup
-    .string()
-    .required("Enter housing type")
-    .min(3, "Housing type needs to be atleast 3 characters"),
+  Description: yup.string(),
 
-  price: yup
-    .number()
-    .required("Must be a whole number")
-    .integer("Must be a whole number")
-    .typeError("Must be a whole number"),
-
-  description: yup
-    .string()
-    .required("Enter the housing description")
-    .min(10, "The message must be at least 10 characters"),
+  Due: yup.string().required("Enter a date"),
 });
 
 export default function AddHousing() {
@@ -56,11 +41,14 @@ export default function AddHousing() {
     setSubmitting(true);
     setServerError(null);
 
+    let formData = new FormData();
+    formData.append("data", JSON.stringify(data));
+
     const token = auth.jwt;
 
     try {
       axios.defaults.headers.common = { Authorization: `bearer ${token}` };
-      const response = await axios.post(url);
+      const response = await axios.post(url, formData);
       console.log("response", response);
     } catch (error) {
       console.log("error", error);
@@ -82,128 +70,39 @@ export default function AddHousing() {
               {serverError && <FormError>{serverError}</FormError>}
               <Form.Row>
                 <Col>
-                  <Form.Label>Housing name</Form.Label>
-                  <Form.Group controlId="formHousingName">
-                    <Form.Control name="name" ref={register} autoFocus />
-                    {errors.name && (
-                      <FormError>{errors.name.message}</FormError>
-                    )}
-                  </Form.Group>
-                </Col>
-
-                <Col>
-                  <Form.Label>Housing adress</Form.Label>
-                  <Form.Group controlId="formAdress">
-                    <Form.Control name="adress" ref={register} />
-                    {errors.adress && (
-                      <FormError>{errors.adress.message}</FormError>
+                  <Form.Label>Title</Form.Label>
+                  <Form.Group controlId="formTitle">
+                    <Form.Control name="Title" ref={register} autoFocus />
+                    {errors.Title && (
+                      <FormError>{errors.Title.message}</FormError>
                     )}
                   </Form.Group>
                 </Col>
               </Form.Row>
               <Form.Row>
                 <Col>
-                  <Form.Label>Type</Form.Label>
-                  <Form.Group controlId="formType">
-                    <Form.Control name="type" ref={register} />
-                    {errors.type && (
-                      <FormError>{errors.type.message}</FormError>
-                    )}
-                  </Form.Group>
-                </Col>
-
-                <Col>
-                  <Form.Label>Price</Form.Label>
-                  <Form.Group controlId="formPrice">
-                    <Form.Control name="price" ref={register} />
-                    {errors.price && (
-                      <FormError>{errors.price.message}</FormError>
-                    )}
-                  </Form.Group>
-                </Col>
-              </Form.Row>
-              <Form.Group controlId="formDescription">
-                <Form.Label>Description</Form.Label>
-                <Form.Control
-                  name="description"
-                  as="textarea"
-                  ref={register}
-                  rows={3}
-                />
-                {errors.description && (
-                  <FormError>{errors.description.message}</FormError>
-                )}
-              </Form.Group>
-              <Form.Row>
-                <Col>
-                  <Form.Group controlId="formImage.one">
-                    <Form.Label className="imageone">
-                      Housing exterior
-                    </Form.Label>
-                    <Form.Control
-                      name="imageone"
-                      type="file"
-                      ref={register}
-                      onChange={handleInputChange}
-                    />
-                    {errors.imageone && (
-                      <FormError>{errors.imageone.message}</FormError>
-                    )}
+                  <Form.Label>Due</Form.Label>
+                  <Form.Group controlId="formDue">
+                    <Form.Control name="Due" ref={register} />
+                    {errors.Due && <FormError>{errors.Due.message}</FormError>}
                   </Form.Group>
                 </Col>
                 <Col>
-                  <Form.Group controlId="formImage.two">
-                    <Form.Label className="imagetwo">
-                      Housing interior
-                    </Form.Label>
+                  <Form.Group controlId="formDescription">
+                    <Form.Label>Description</Form.Label>
                     <Form.Control
-                      name="imagetwo"
-                      type="file"
+                      name="Description"
+                      as="textarea"
                       ref={register}
-                      onChange={handleInputChange}
+                      rows={3}
                     />
-                    {errors.imagetwo && (
-                      <FormError>{errors.imagetwo.message}</FormError>
-                    )}
-                  </Form.Group>{" "}
-                </Col>{" "}
-              </Form.Row>
-              <Form.Row>
-                <Col>
-                  <Form.Group controlId="formImage.three">
-                    <Form.Label className="imagethree">
-                      Housing interior
-                    </Form.Label>
-
-                    <Form.Control
-                      name="imagethree"
-                      type="file"
-                      ref={register}
-                      onChange={handleInputChange}
-                    />
-                    {errors.imagethree && (
-                      <FormError>{errors.imagethree.message}</FormError>
-                    )}
-                  </Form.Group>{" "}
-                </Col>
-                <Col>
-                  <Form.Group controlId="formImage.four">
-                    <Form.Label className="imagefour">
-                      Housing interior
-                    </Form.Label>
-
-                    <Form.Control
-                      name="imagefour"
-                      type="file"
-                      ref={register}
-                      onChange={handleInputChange}
-                    />
-                    {errors.imagefour && (
-                      <FormError>{errors.imagefour.message}</FormError>
+                    {errors.description && (
+                      <FormError>{errors.description.message}</FormError>
                     )}
                   </Form.Group>
                 </Col>
               </Form.Row>
+
               <Form.Group name="buttonSend">
                 <Button type="submit" value="Submit" variant="btn-submit">
                   {submitting ? "Submitting..." : "Submit"}
