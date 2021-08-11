@@ -23,14 +23,16 @@ const schema = yup.object().shape({
 
   Description: yup.string(),
 
-  Due: yup.string().required("Enter a date"),
+  Due: yup.date().required("Enter a date"),
 });
 
 export default function AddHousing() {
   const [submitting, setSubmitting] = useState(false);
   const [serverError, setServerError] = useState(null);
+  const [date, setDate] = useState(new Date());
 
   const [auth, setAuth] = useContext(AuthContext);
+
   const url = TODO_LIST;
 
   const { register, handleSubmit, errors } = useForm({
@@ -55,6 +57,7 @@ export default function AddHousing() {
       setServerError(error.toString());
     } finally {
       setSubmitting(false);
+      window.location.reload(false);
     }
   }
 
@@ -81,12 +84,20 @@ export default function AddHousing() {
               </Form.Row>
               <Form.Row>
                 <Col>
+                  {" "}
                   <Form.Label>Due</Form.Label>
-                  <Form.Group controlId="formDue">
-                    <Form.Control name="Due" ref={register} />
-                    {errors.Due && <FormError>{errors.Due.message}</FormError>}
+                  <Form.Group controlId="duedate">
+                    <Form.Control
+                      type="date"
+                      name="Due"
+                      ref={register}
+                      placeholder="Due date"
+                      value={date}
+                      onChange={(e) => setDate(e.target.value)}
+                    />
                   </Form.Group>
                 </Col>
+                <Col> </Col>
                 <Col>
                   <Form.Group controlId="formDescription">
                     <Form.Label>Description</Form.Label>
@@ -106,7 +117,7 @@ export default function AddHousing() {
               <Form.Group name="buttonSend">
                 <Button type="submit" value="Submit" variant="btn-submit">
                   {submitting ? "Submitting..." : "Submit"}
-                  <Icon.ChevronRight color="white" size={20} />
+                  <Icon.PlusCircleFill color="white" size={20} />
                 </Button>
               </Form.Group>
             </Form>
