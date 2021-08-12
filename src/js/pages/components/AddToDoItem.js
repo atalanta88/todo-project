@@ -13,6 +13,7 @@ import FormError from "../../common/FormError";
 import axios from "axios";
 import AuthContext from "../../context/AuthContext";
 import { TODO_LIST } from "../../constants/api";
+import { useHistory } from "react-router-dom";
 
 //Bruker yup som validation schema for forms.
 //Det viser en beskjed/error message når brukere ikke legger inn riktige values.
@@ -31,6 +32,7 @@ export default function AddToDoItem() {
   const [submitting, setSubmitting] = useState(false);
   const [serverError, setServerError] = useState(null);
   const [date, setDate] = useState(new Date());
+  const history = useHistory();
 
   //JWT token er lagret i local storage -
   // og vi lager en variabel som vi kan bruke når vi trenger autorisering.
@@ -66,7 +68,7 @@ export default function AddToDoItem() {
       setServerError(error.toString());
     } finally {
       setSubmitting(false);
-      window.location.reload(false);
+      history.push("/");
     }
   }
 

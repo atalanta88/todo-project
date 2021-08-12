@@ -16,6 +16,7 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { Button } from "react-bootstrap";
 import Moment from "react-moment";
+import { useHistory } from "react-router-dom";
 
 const baseURL = TODO_LIST;
 
@@ -39,6 +40,7 @@ function ToDoItem({ Title, id, Due }) {
 
   const [submitting, setSubmitting] = useState(false);
   const [serverError, setServerError] = useState(null);
+  const history = useHistory();
 
   const [date, setDate] = useState(new Date());
   const dateToFormat = `${Due}`;
@@ -57,7 +59,7 @@ function ToDoItem({ Title, id, Due }) {
       if (ConfirmDelete == true) {
         axios.delete(`${baseURL}/${id}`).then(() => {
           setPost(null);
-          window.location.reload(false);
+          history.push("/");
         });
       } else {
         //Do nothing
@@ -92,7 +94,7 @@ function ToDoItem({ Title, id, Due }) {
       setServerError(error.toString());
     } finally {
       setSubmitting(false);
-      window.location.reload(false);
+      history.push("/");
     }
   }
 
