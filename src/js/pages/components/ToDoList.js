@@ -1,6 +1,5 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import Card from "react-bootstrap/Card";
 import { TODO_LIST } from "../../constants/api";
 import ToDoItem from "./ToDoItem";
 import ErrorMessage from "../../common/ErrorMessage";
@@ -37,24 +36,20 @@ function ToDoList() {
   return (
     <>
       {" "}
-      <Card>
-        <Card.Body className="accordion-card-body">
-          {contacts.map(function (contact) {
-            const { id, Title, Description, Due, Finished } = contact;
+      {contacts.map(function (contact) {
+        const { id, Title, Description, Due, Finished } = contact;
 
-            return (
-              <ToDoItem
-                key={id}
-                Title={Title}
-                Description={Description}
-                id={id}
-                Finished={Finished}
-                Due={Due}
-              />
-            );
-          })}
-        </Card.Body>
-      </Card>
+        return (
+          <ToDoItem
+            key={id}
+            Title={Title}
+            Description={Description}
+            id={id}
+            Finished={Finished}
+            Due={Due}
+          />
+        );
+      })}
     </>
   );
 }

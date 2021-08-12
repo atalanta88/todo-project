@@ -85,7 +85,7 @@ export default function LoginForm() {
                 )}
               </Form.Group>
 
-              <Button variant="btn-submit" type="submit" block>
+              <Button variant="outline-dark" type="submit" block>
                 {submitting ? "Loggin in..." : "Login"}{" "}
               </Button>
             </fieldset>

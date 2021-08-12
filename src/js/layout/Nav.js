@@ -48,7 +48,7 @@ function NavbarLayout() {
                     <Icon.PersonCheckFill color="#00beaf" size={30} />
                   </Nav.Link>
                 </LinkContainer>{" "}
-                <Button variant="primary-color" type="submit" onClick={logout}>
+                <Button variant="outline-light" type="submit" onClick={logout}>
                   Log out
                 </Button>
               </>
