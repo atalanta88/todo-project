@@ -113,7 +113,7 @@ export default function AddToDoItem() {
                     aria-label="What to do?"
                     name="Title"
                     ref={register}
-                    autoFocus
+                    autoFocus={false}
                   />
                   {errors.Title && (
                     <FormError>

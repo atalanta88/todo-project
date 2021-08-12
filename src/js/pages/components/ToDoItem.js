@@ -26,16 +26,12 @@ const baseURL = TODO_LIST;
 const schema = yup.object().shape({
   Due: yup.date().required("Set a date").typeError("Set a date"),
 
-  Title: yup
-    .string()
-    .required("Update task")
-    .min(3, "Task needs to be atleast 3 characters"),
+  Title: yup.string().required("Update task"),
 });
 
 //Vi henter props fra ToDoList for å bruke her for å vise frem to do list.
 
 function ToDoItem({ Title, id, Due }) {
-  const [show, setShow] = useState(false);
   const [post, setPost] = useState(null);
 
   const [submitting, setSubmitting] = useState(false);
@@ -98,6 +94,8 @@ function ToDoItem({ Title, id, Due }) {
     }
   }
 
+  const [show, setShow] = useState(false);
+
   function UpdateItem() {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -109,6 +107,9 @@ function ToDoItem({ Title, id, Due }) {
         </Button>
 
         <Modal show={show} onHide={handleClose} animation={false}>
+          <Modal.Header>
+            <Modal.Title>Update task</Modal.Title>
+          </Modal.Header>
           <Modal.Body>
             {" "}
             <Container>
@@ -119,6 +120,7 @@ function ToDoItem({ Title, id, Due }) {
                     {" "}
                     <Form.Group controlId="duedate">
                       <Form.Control
+                        autoFocus={false}
                         type="date"
                         name="Due"
                         ref={register}
@@ -138,10 +140,10 @@ function ToDoItem({ Title, id, Due }) {
                   <Col>
                     <Form.Group controlId="formTitle">
                       <Form.Control
+                        autoFocus={false}
                         placeholder={Title}
                         name="Title"
                         ref={register}
-                        autoFocus
                       />
                       {errors.Title && (
                         <FormError>

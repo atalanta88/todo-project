@@ -14,6 +14,7 @@ import FooterLayout from "./js/layout/Footer";
 import NavbarLayout from "./js/layout/Nav";
 
 import ScrollToTop from "./js/common/ScrollToTop";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
