@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import * as Icon from "react-bootstrap-icons";
 
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
@@ -14,14 +15,12 @@ import AuthContext from "../../context/AuthContext";
 import { TODO_LIST } from "../../constants/api";
 
 const schema = yup.object().shape({
-  Due: yup.date().required("Enter a date"),
+  Due: yup.date().required("Set a date").typeError("Set a date"),
 
   Title: yup
     .string()
-    .required("Enter the title")
-    .min(3, "Title needs to be atleast 3 characters"),
-
-  Description: yup.string(),
+    .required("Update task")
+    .min(3, "Task needs to be atleast 3 characters"),
 });
 
 export default function AddHousing() {
@@ -64,55 +63,65 @@ export default function AddHousing() {
   return (
     <>
       {" "}
-      <Container>
-        <Form disabled={submitting} onSubmit={handleSubmit(onSubmit)}>
-          {serverError && <FormError>{serverError}</FormError>}
-          <Form.Row>
-            <Col>
-              {" "}
-              <Form.Label>Due</Form.Label>
-              <Form.Group controlId="duedate">
-                <Form.Control
-                  type="date"
-                  name="Due"
-                  ref={register}
-                  placeholder="Due date"
-                  value={date}
-                  onChange={(e) => setDate(e.target.value)}
-                />
-              </Form.Group>
-            </Col>
-          </Form.Row>
-          <Form.Row>
-            <Col>
-              <Form.Label>Title</Form.Label>
-              <Form.Group controlId="formTitle">
-                <Form.Control name="Title" ref={register} autoFocus />
-                {errors.Title && <FormError>{errors.Title.message}</FormError>}
-              </Form.Group>
-            </Col>
-            <Col>
-              <Form.Group controlId="formDescription">
-                <Form.Label>Description</Form.Label>
-                <Form.Control
-                  name="Description"
-                  as="textarea"
-                  ref={register}
-                  rows={3}
-                />
-                {errors.description && (
-                  <FormError>{errors.description.message}</FormError>
-                )}
-              </Form.Group>
-            </Col>
-          </Form.Row>
+      <Container fluid className="add-todo-item-background">
+        <div className="add-todo-item-wrapper">
+          <h1>Add a task</h1>
 
-          <Form.Group name="buttonSend">
-            <Button type="submit" value="Submit" variant="outline-dark">
-              {submitting ? "Submitting..." : "Submit"}
-            </Button>
-          </Form.Group>
-        </Form>
+          <Form disabled={submitting} onSubmit={handleSubmit(onSubmit)}>
+            {serverError && <FormError>{serverError}</FormError>}
+            <Form.Row>
+              <Col>
+                {" "}
+                <Form.Group controlId="duedate">
+                  <Form.Control
+                    type="date"
+                    name="Due"
+                    ref={register}
+                    placeholder="Due date"
+                    value={date}
+                    onChange={(e) => setDate(e.target.value)}
+                  />
+                  {errors.Due && (
+                    <FormError>
+                      {" "}
+                      <Icon.ExclamationCircle color="white" size={20} />
+                      {errors.Due.message}
+                    </FormError>
+                  )}
+                </Form.Group>
+              </Col>
+            </Form.Row>
+            <Form.Row>
+              <Col>
+                <Form.Group controlId="formTitle">
+                  <Form.Control
+                    placeholder="What to do?"
+                    aria-label="What to do?"
+                    name="Title"
+                    ref={register}
+                    autoFocus
+                  />
+                  {errors.Title && (
+                    <FormError>
+                      {" "}
+                      <Icon.ExclamationCircle color="white" size={20} />
+                      {errors.Title.message}
+                    </FormError>
+                  )}
+                </Form.Group>
+              </Col>
+            </Form.Row>
+            <Form.Row>
+              <Col>
+                <Form.Group name="buttonSend">
+                  <Button type="submit" value="Submit" variant="outline-light">
+                    {submitting ? "ADDING..." : "ADD"}
+                  </Button>
+                </Form.Group>
+              </Col>
+            </Form.Row>
+          </Form>
+        </div>
       </Container>
     </>
   );

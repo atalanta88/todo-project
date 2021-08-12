@@ -3,6 +3,7 @@ import { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
+import * as Icon from "react-bootstrap-icons";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
@@ -47,12 +48,12 @@ export default function LoginForm() {
       const response = await axios.post(url, data);
       console.log("response", response.data);
       setAuth(response.data);
-      history.push("/Home");
     } catch (error) {
       console.log("error", error);
       setLoginError(error.toString());
     } finally {
       setSubmitting(false);
+      history.push("/Home");
     }
   }
 
@@ -61,27 +62,36 @@ export default function LoginForm() {
       <Container className="login-container">
         {" "}
         <div className="login-background">
-          <Image src={logo} roundedCircle width="200" height="200" />{" "}
+          <Image src={logo} roundedCircle width="100" height="100" />{" "}
           <Form onSubmit={handleSubmit(onSubmit)}>
             {loginError && <FormError>{loginError}</FormError>}
             <fieldset disabled={submitting}>
-              <Form.Label>Username</Form.Label>
               <Form.Group controlId="formBasicUsername">
-                <Form.Control name="identifier" ref={register}></Form.Control>
+                <Form.Control
+                  placeholder="Username"
+                  name="identifier"
+                  ref={register}
+                ></Form.Control>
                 {errors.identifier && (
-                  <FormError>{errors.identifier.message}</FormError>
+                  <FormError>
+                    <Icon.ExclamationCircle color="white" size={20} />
+                    {errors.identifier.message}
+                  </FormError>
                 )}
               </Form.Group>
 
-              <Form.Label>Password</Form.Label>
               <Form.Group controlId="formBasicPassword">
                 <Form.Control
+                  placeholder="Password"
                   type="password"
                   name="password"
                   ref={register}
                 ></Form.Control>
                 {errors.password && (
-                  <FormError>{errors.password.message}</FormError>
+                  <FormError>
+                    <Icon.ExclamationCircle color="white" size={20} />
+                    {errors.password.message}
+                  </FormError>
                 )}
               </Form.Group>
 

@@ -11,7 +11,7 @@ export default function HomePage() {
         <Jumbotron>
           <AddToDoItem />
           <Container className="text-container-home">
-            <h1>To do list</h1>
+            <h2>To do list</h2>
             <ToDoList />
           </Container>
         </Jumbotron>

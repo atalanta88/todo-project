@@ -8,8 +8,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import FormError from "../../common/FormError";
 import * as Icon from "react-bootstrap-icons";
 
-import Dropdown from "react-bootstrap/Dropdown";
-import DropdownButton from "react-bootstrap/DropdownButton";
+import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Container from "react-bootstrap/Container";
@@ -17,21 +16,17 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { Button } from "react-bootstrap";
 import Moment from "react-moment";
+import { Redirect } from "react-router-dom";
 
 const baseURL = TODO_LIST;
 
 const schema = yup.object().shape({
-  Due: yup.date(),
+  Due: yup.date().required("Set a date").typeError("Set a date"),
 
-  Title: yup
-    .string()
-    .required("Enter the title")
-    .min(3, "Title needs to be atleast 3 characters"),
-
-  Description: yup.string(),
+  Title: yup.string().required("Update task"),
 });
 
-function ToDoItem({ Title, Description, id, Due, Finished }) {
+function ToDoItem({ Title, id, Due, Finished }) {
   const [show, setShow] = useState(false);
   const [post, setPost] = useState(null);
 
@@ -45,19 +40,17 @@ function ToDoItem({ Title, Description, id, Due, Finished }) {
   const token = auth.jwt;
 
   function deletePost() {
-    var ConfirmDelete = window.confirm(
-      "You want to delete an user! are you sure?"
-    );
+    var ConfirmDelete = window.confirm("Delete the task?");
 
     try {
       axios.defaults.headers.common = { Authorization: `bearer ${token}` };
       if (ConfirmDelete == true) {
         axios.delete(`${baseURL}/${id}`).then(() => {
-          alert("Post deleted!");
           setPost(null);
           window.location.reload(false);
         });
       } else {
+        //Do nothing
       }
     } catch (error) {
       console.log("error", error);
@@ -94,8 +87,8 @@ function ToDoItem({ Title, Description, id, Due, Finished }) {
 
     return (
       <>
-        <Button variant="outline-light" onClick={handleShow}>
-          <Icon.PencilSquare color="grey" size={20} />
+        <Button variant="icon-button" onClick={handleShow}>
+          <Icon.PencilSquare color="white" size={20} />
         </Button>
 
         <Modal show={show} onHide={handleClose} animation={false}>
@@ -107,40 +100,37 @@ function ToDoItem({ Title, Description, id, Due, Finished }) {
                 <Form.Row>
                   <Col>
                     {" "}
-                    <Form.Label>Due</Form.Label>
                     <Form.Group controlId="duedate">
                       <Form.Control
                         type="date"
                         name="Due"
                         ref={register}
-                        placeholder="Due date"
                         value={date}
                         onChange={(e) => setDate(e.target.value)}
                       />
+                      {errors.Due && (
+                        <FormError>
+                          <Icon.ExclamationCircle color="white" size={20} />
+                          {errors.Due.message}
+                        </FormError>
+                      )}
                     </Form.Group>
                   </Col>
                 </Form.Row>
                 <Form.Row>
                   <Col>
-                    <Form.Label>Title</Form.Label>
                     <Form.Group controlId="formTitle">
-                      <Form.Control name="Title" ref={register} autoFocus />
-                      {errors.Title && (
-                        <FormError>{errors.Title.message}</FormError>
-                      )}
-                    </Form.Group>
-                  </Col>
-                  <Col>
-                    <Form.Group controlId="formDescription">
-                      <Form.Label>Description</Form.Label>
                       <Form.Control
-                        name="Description"
-                        as="textarea"
+                        placeholder={Title}
+                        name="Title"
                         ref={register}
-                        rows={3}
+                        autoFocus
                       />
-                      {errors.description && (
-                        <FormError>{errors.description.message}</FormError>
+                      {errors.Title && (
+                        <FormError>
+                          <Icon.ExclamationCircle color="white" size={20} />
+                          {errors.Title.message}
+                        </FormError>
                       )}
                     </Form.Group>
                   </Col>
@@ -166,24 +156,36 @@ function ToDoItem({ Title, Description, id, Due, Finished }) {
 
   return (
     <>
-      <Container key={id}>
-        <Row>
-          <Col>{Title}</Col>
-          <Col>
+      <Row>
+        <Col>
+          <Container className="todo-item-background" key={id}>
+            <Row>
+              <Col>
+                <Card.Title>{Title}</Card.Title>
+              </Col>
+            </Row>
+
+            <Row>
+              <Col>
+                {" "}
+                <small className="text-muted">
+                  {" "}
+                  <Moment format="dddd DD - MMM   YY">{dateToFormat}</Moment>
+                </small>
+              </Col>
+            </Row>
+          </Container>
+        </Col>
+        <Col sm={2}>
+          <Container className="icons-background">
             {" "}
-            <small className="text-muted">
-              {" "}
-              <Moment format="dddd DD - MMM   YY">{dateToFormat}</Moment>
-            </small>
-          </Col>
-          <Col>
-            <Button onClick={deletePost} variant="outline-light">
-              <Icon.Trash color="grey" size={20} />
+            <Button onClick={deletePost} variant="icon-button">
+              <Icon.Trash color="white" size={20} />
             </Button>
             <UpdateItem />
-          </Col>
-        </Row>
-      </Container>
+          </Container>
+        </Col>
+      </Row>
     </>
   );
 }
