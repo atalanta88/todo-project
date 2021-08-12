@@ -11,13 +11,6 @@ body {
   font-family: "Open Sans", sans-serif;
 }
 
-.text-center {
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .text-container-home h2 {
   margin-top: 50px;
   margin-bottom: 20px;
@@ -44,4 +37,13 @@ body {
 
 .form-group {
   margin-top: 20px;
+}
+
+.footer .text-center {
+  font-size: 14px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 15px;
 }

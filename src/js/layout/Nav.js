@@ -35,7 +35,10 @@ function NavbarLayout() {
             <Image src={logo} roundedCircle width="50" height="50" />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
+          <Navbar.Collapse
+            className="justify-content-end"
+            id="basic-navbar-nav"
+          >
             {auth ? (
               <>
                 {" "}

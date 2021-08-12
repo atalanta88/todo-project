@@ -11,19 +11,6 @@ body {
   font-family: "Open Sans", sans-serif;
 }
 
-.text-center {
-  color: white;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
 .text-container-home h2 {
   margin-top: 50px;
   margin-bottom: 20px;
@@ -50,6 +37,21 @@ body {
 
 .form-group {
   margin-top: 20px;
+}
+
+.footer .text-center {
+  font-size: 14px;
+  color: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-bottom: 15px;
 }
 
 html,
@@ -152,15 +154,12 @@ body {
 
 .text-container-home {
   max-width: 500px !important;
+  margin-bottom: 50px;
 }
 
 .add-todo-item-background {
-  background: #06beb6;
+  background: #212529;
   /* fallback for old browsers */
-  /* Chrome 10-25, Safari 5.1-6 */
-  background: -webkit-gradient(linear, left top, right top, from(#48b1bf), to(#06beb6));
-  background: linear-gradient(to right, #48b1bf, #06beb6);
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .add-todo-item-wrapper {
