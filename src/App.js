@@ -21,17 +21,17 @@ function App() {
       <AuthProvider>
         <Router>
           <Route exact path="/">
-            <Redirect to="/home" />
+            <Redirect to="/" />
           </Route>
           <ScrollToTop />
           <NavbarLayout />
           <div id="container">
             <div id="main-content">
               <Switch>
-                <Route path="/home">
+                <Route path="/">
                   <Home />
                 </Route>
-                <Route path="/login">
+                <Route path="/Login">
                   <LoginAndRegister />
                 </Route>
               </Switch>

@@ -17,19 +17,20 @@ function ToDoList() {
     async function fetchData() {
       if (auth === null) {
         history.push("/Login");
-      }
-      try {
-        const response = await fetch(url);
+      } else {
+        try {
+          const response = await fetch(url);
 
-        if (response.ok) {
-          const json = await response.json();
-          //console.log(json);
-          setToDoList(json);
-        } else {
-          setError("A server error occured");
+          if (response.ok) {
+            const json = await response.json();
+            //console.log(json);
+            setToDoList(json);
+          } else {
+            setError("A server error occured");
+          }
+        } catch (error) {
+          setError(error.toString());
         }
-      } catch (error) {
-        setError(error.toString());
       }
     }
     fetchData();
