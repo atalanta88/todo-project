@@ -7,7 +7,7 @@ import {
   Redirect,
 } from "react-router-dom";
 import Home from "./js/pages/Home";
-import LoginAndRegister from "./js/pages/login/Login";
+import Login from "./js/pages/login/Login";
 import { AuthProvider } from "./js/context/AuthContext";
 
 import FooterLayout from "./js/layout/Footer";
@@ -21,18 +21,19 @@ function App() {
       <AuthProvider>
         <Router>
           <Route exact path="/">
-            <Redirect to="/" />
+            <Redirect to="/home" />
           </Route>
+
           <ScrollToTop />
           <NavbarLayout />
           <div id="container">
             <div id="main-content">
               <Switch>
-                <Route path="/">
+                <Route path="/home">
                   <Home />
                 </Route>
-                <Route path="/Login">
-                  <LoginAndRegister />
+                <Route path="/login">
+                  <Login />
                 </Route>
               </Switch>
             </div>

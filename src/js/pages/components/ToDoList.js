@@ -16,7 +16,7 @@ function ToDoList() {
   useEffect(function () {
     async function fetchData() {
       if (auth === null) {
-        history.push("/Login");
+        history.push("/login");
       } else {
         try {
           const response = await fetch(url);

@@ -50,7 +50,7 @@ function NavbarLayout() {
               </>
             ) : (
               <>
-                <LinkContainer to="/login">
+                <LinkContainer to="/Login">
                   <Nav.Link>
                     {" "}
                     <Icon.PersonFill color="#00beaf" size={30} />
