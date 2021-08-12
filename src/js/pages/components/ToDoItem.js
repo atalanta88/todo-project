@@ -94,6 +94,7 @@ function ToDoItem({ Title, id, Due }) {
     }
   }
 
+  //Modal open and close functionality
   const [show, setShow] = useState(false);
 
   function UpdateItem() {
@@ -103,7 +104,7 @@ function ToDoItem({ Title, id, Due }) {
     return (
       <>
         <Button variant="icon-button" onClick={handleShow}>
-          <Icon.PencilSquare color="white" size={20} />
+          <Icon.PencilSquare color="white" size={25} />
         </Button>
 
         <Modal show={show} onHide={handleClose} animation={false}>
@@ -201,7 +202,7 @@ function ToDoItem({ Title, id, Due }) {
           <Container className="icons-background">
             {" "}
             <Button onClick={deletePost} variant="icon-button">
-              <Icon.Trash color="white" size={20} />
+              <Icon.Trash color="white" size={25} />
             </Button>
             <UpdateItem />
           </Container>
