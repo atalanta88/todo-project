@@ -24,22 +24,18 @@ function NavbarLayout() {
 
   function logout() {
     setAuth(null);
-    history.push("/Home");
+    history.push("/Login");
   }
+
   return (
     <>
       <Navbar className="fixed-bottom-nav" bg="dark" variant="dark" expand="lg">
         <Container>
-          <Navbar.Brand as={Link} to="/Home">
+          <Navbar.Brand>
             <Image src={logo} roundedCircle width="50" height="50" />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="mr-auto">
-              <LinkContainer to="/Home">
-                <Nav.Link>Hjem</Nav.Link>
-              </LinkContainer>
-            </Nav>
             {auth ? (
               <>
                 {" "}
