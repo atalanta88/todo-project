@@ -16,29 +16,39 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { Button } from "react-bootstrap";
 import Moment from "react-moment";
-import { Redirect } from "react-router-dom";
 
 const baseURL = TODO_LIST;
+
+//Bruker yup som validation schema for forms.
+//Det viser en beskjed/error message når brukere ikke legger inn riktige values.
 
 const schema = yup.object().shape({
   Due: yup.date().required("Set a date").typeError("Set a date"),
 
-  Title: yup.string().required("Update task"),
+  Title: yup
+    .string()
+    .required("Update task")
+    .min(3, "Task needs to be atleast 3 characters"),
 });
 
-function ToDoItem({ Title, id, Due, Finished }) {
+//Vi henter props fra ToDoList for å bruke her for å vise frem to do list.
+
+function ToDoItem({ Title, id, Due }) {
   const [show, setShow] = useState(false);
   const [post, setPost] = useState(null);
 
   const [submitting, setSubmitting] = useState(false);
   const [serverError, setServerError] = useState(null);
-  const [date, setDate] = useState(new Date());
-  const [auth, setAuth] = useContext(AuthContext);
 
+  const [date, setDate] = useState(new Date());
   const dateToFormat = `${Due}`;
 
+  //JWT token er lagret i local storage -
+  // og vi lager en variabel som vi kan bruke når vi trenger autorisering.
+  const [auth, setAuth] = useContext(AuthContext);
   const token = auth.jwt;
 
+  //Brukeren kan slette en task ved å trykke på søppel ikonet.
   function deletePost() {
     var ConfirmDelete = window.confirm("Delete the task?");
 
@@ -53,14 +63,19 @@ function ToDoItem({ Title, id, Due, Finished }) {
         //Do nothing
       }
     } catch (error) {
-      console.log("error", error);
+      //console.log("error", error);
     }
   }
 
+  // Det som blir skrevet på input fields,
+  // i forms registreres i register og sendt til databasen vist autoriseringen blir godkjent.
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(schema),
   });
 
+  //Når brukeren er ferdig å legge inn en task,
+  //trigger denne funksjonen og sender autorisering til header,
+  //sammen med data fra input som poster en ny task til databasen.
   async function onSubmit(data) {
     setSubmitting(true);
     setServerError(null);
@@ -71,9 +86,9 @@ function ToDoItem({ Title, id, Due, Finished }) {
     try {
       axios.defaults.headers.common = { Authorization: `bearer ${token}` };
       const response = await axios.put(`${baseURL}/${id}`, formData);
-      console.log("response", response);
+      //console.log("response", response);
     } catch (error) {
-      console.log("error", error);
+      //console.log("error", error);
       setServerError(error.toString());
     } finally {
       setSubmitting(false);
@@ -138,7 +153,7 @@ function ToDoItem({ Title, id, Due, Finished }) {
 
                 <Form.Group name="buttonSend">
                   <Button type="submit" value="Submit" variant="outline-dark">
-                    {submitting ? "Submitting..." : "Submit"}
+                    {submitting ? "ADDING..." : "ADD"}
                   </Button>
                 </Form.Group>
               </Form>
@@ -170,7 +185,9 @@ function ToDoItem({ Title, id, Due, Finished }) {
                 {" "}
                 <small className="text-muted">
                   {" "}
-                  <Moment format="dddd DD - MMM   YY">{dateToFormat}</Moment>
+                  <Moment add={{ days: 1 }} format="dddd, MMMM Do YYYY">
+                    {dateToFormat}
+                  </Moment>
                 </small>
               </Col>
             </Row>

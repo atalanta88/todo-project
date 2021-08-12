@@ -14,27 +14,39 @@ import axios from "axios";
 import AuthContext from "../../context/AuthContext";
 import { TODO_LIST } from "../../constants/api";
 
+//Bruker yup som validation schema for forms.
+//Det viser en beskjed/error message når brukere ikke legger inn riktige values.
+
 const schema = yup.object().shape({
   Due: yup.date().required("Set a date").typeError("Set a date"),
 
   Title: yup
     .string()
-    .required("Update task")
+    .required("Please enter a task")
     .min(3, "Task needs to be atleast 3 characters"),
 });
 
-export default function AddHousing() {
+//Denne funksjonen lar oss legge inn nye gjøremål.
+export default function AddToDoItem() {
   const [submitting, setSubmitting] = useState(false);
   const [serverError, setServerError] = useState(null);
   const [date, setDate] = useState(new Date());
 
+  //JWT token er lagret i local storage -
+  // og vi lager en variabel som vi kan bruke når vi trenger autorisering.
   const [auth, setAuth] = useContext(AuthContext);
 
   const url = TODO_LIST;
 
+  // Det som blir skrevet på input fields,
+  // i forms registreres i register og sendt til databasen vist autoriseringen blir godkjent.
   const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(schema),
   });
+
+  //Når brukeren er ferdig å legge inn en task,
+  //trigger denne funksjonen og sender autorisering til header,
+  //sammen med data fra input som poster en ny task til databasen.
 
   async function onSubmit(data) {
     setSubmitting(true);
@@ -48,9 +60,9 @@ export default function AddHousing() {
     try {
       axios.defaults.headers.common = { Authorization: `bearer ${token}` };
       const response = await axios.post(url, formData);
-      console.log("response", response);
+      //console.log("response", response);
     } catch (error) {
-      console.log("error", error);
+      //console.log("error", error);
       setServerError(error.toString());
     } finally {
       setSubmitting(false);
@@ -58,7 +70,7 @@ export default function AddHousing() {
     }
   }
 
-  console.log(errors);
+  //console.log(errors);
 
   return (
     <>
