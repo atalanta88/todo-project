@@ -79,7 +79,9 @@ export default function AddToDoItem() {
       {" "}
       <Container fluid className="add-todo-item-background">
         <div className="add-todo-item-wrapper">
-          <h1>Add a task</h1>
+          <div className="underline-container">
+            <h1>Add a task</h1>
+          </div>
 
           <Form disabled={submitting} onSubmit={handleSubmit(onSubmit)}>
             {serverError && <FormError>{serverError}</FormError>}

@@ -52,7 +52,7 @@ function ToDoItem({ Title, id, Due }) {
 
     try {
       axios.defaults.headers.common = { Authorization: `bearer ${token}` };
-      if (ConfirmDelete == true) {
+      if (ConfirmDelete === true) {
         axios.delete(`${baseURL}/${id}`).then(() => {
           setPost(null);
           history.push("/");
