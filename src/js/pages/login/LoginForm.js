@@ -16,8 +16,6 @@ import AuthContext from "../../context/AuthContext";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
-import Image from "react-bootstrap/Image";
-import logo from "../../../media/list.png";
 
 const url = BASE_URL + TOKEN_PATH;
 
@@ -64,7 +62,6 @@ export default function LoginForm() {
       <Container className="login-container">
         {" "}
         <div className="login-background">
-          <Image src={logo} roundedCircle width="100" height="100" />{" "}
           <Form onSubmit={handleSubmit(onSubmit)}>
             {loginError && <FormError>{loginError}</FormError>}
             <fieldset disabled={submitting}>
@@ -97,7 +94,12 @@ export default function LoginForm() {
                 )}
               </Form.Group>
 
-              <Button variant="outline-light" type="submit" block>
+              <Button
+                className="col-12"
+                variant="outline-light"
+                type="submit"
+                size="lg"
+              >
                 {submitting ? "Loggin in..." : "Login"}{" "}
               </Button>
             </fieldset>

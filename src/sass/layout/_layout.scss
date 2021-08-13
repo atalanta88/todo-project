@@ -33,19 +33,35 @@ body {
 }
 
 .hero-wrapper-login {
-  max-width: 500px;
+  max-width: 400px;
   padding: 50px 20px;
   border-radius: 5px;
   margin: 0 auto;
-  margin-top: 10%;
   background-color: #212529;
 }
 
-.login-background img {
+.login-row img {
   margin-left: auto;
   margin-right: auto;
   display: block;
   margin-bottom: 20px;
+}
+
+.login-row {
+  margin-top: 10% !important;
+  margin-bottom: 40% !important;
+
+  .card {
+    border: 1px solid rgba(212, 22, 22, 0);
+  }
+}
+
+.login-card-background {
+  background-color: rgba(255, 255, 255, 0) !important;
+  border: 1px solid rgba(212, 22, 22, 0);
+  max-width: 400px;
+  margin: 0 auto;
+  margin-bottom: 0.1rem;
 }
 
 .text-container-home {
