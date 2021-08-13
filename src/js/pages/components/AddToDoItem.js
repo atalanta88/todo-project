@@ -130,7 +130,12 @@ export default function AddToDoItem() {
             <Form.Row>
               <Col>
                 <Form.Group name="buttonSend">
-                  <Button type="submit" value="Submit" variant="outline-light">
+                  <Button
+                    className="col-12"
+                    type="submit"
+                    value="Submit"
+                    variant="outline-light"
+                  >
                     {submitting ? "ADDING..." : "ADD"}
                   </Button>
                 </Form.Group>

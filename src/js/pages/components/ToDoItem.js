@@ -160,7 +160,12 @@ function ToDoItem({ Title, id, Due }) {
                 </Form.Row>
 
                 <Form.Group name="buttonSend">
-                  <Button type="submit" value="Submit" variant="outline-dark">
+                  <Button
+                    className="col-12"
+                    type="submit"
+                    value="Submit"
+                    variant="outline-dark"
+                  >
                     {submitting ? "ADDING..." : "ADD"}
                   </Button>
                 </Form.Group>

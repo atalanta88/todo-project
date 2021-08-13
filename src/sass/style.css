@@ -192,6 +192,7 @@ body {
 .add-todo-item-background {
   background: #212529;
   /* fallback for old browsers */
+  color: white;
 }
 
 .add-todo-item-wrapper {
