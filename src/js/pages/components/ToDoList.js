@@ -7,14 +7,16 @@ import { useHistory } from "react-router-dom";
 
 const url = TODO_LIST;
 
+// Henter api med fetch
 function ToDoList() {
-  const [contacts, setToDoList] = useState([]);
+  const [TaskItems, setToDoList] = useState([]);
   const [error, setError] = useState(null);
   const [auth, setAuth] = useContext(AuthContext);
   const history = useHistory();
 
   useEffect(function () {
     async function fetchData() {
+      //vist man ikke er logget inn redirectes man til login siden.
       if (auth === null) {
         history.push("/login");
       } else {
@@ -43,8 +45,8 @@ function ToDoList() {
   return (
     <>
       {" "}
-      {contacts.map(function (contact) {
-        const { id, Title, Description, Due, Finished } = contact;
+      {TaskItems.map(function (TaskItem) {
+        const { id, Title, Description, Due, Finished } = TaskItem;
 
         return (
           <ToDoItem

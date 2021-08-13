@@ -62,7 +62,7 @@ export default function AddToDoItem() {
     try {
       axios.defaults.headers.common = { Authorization: `bearer ${token}` };
       const response = await axios.post(url, formData);
-      //console.log("response", response);
+      console.log("response", response);
     } catch (error) {
       //console.log("error", error);
       setServerError(error.toString());
@@ -87,6 +87,8 @@ export default function AddToDoItem() {
               <Col>
                 {" "}
                 <Form.Group controlId="duedate">
+                  <Form.Label>Pick a date</Form.Label>
+
                   <Form.Control
                     type="date"
                     name="Due"

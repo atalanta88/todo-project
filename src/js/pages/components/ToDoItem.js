@@ -120,8 +120,11 @@ function ToDoItem({ Title, id, Due }) {
                   <Col>
                     {" "}
                     <Form.Group controlId="duedate">
+                      <Form.Label>Pick a date</Form.Label>
+
                       <Form.Control
                         autoFocus={false}
+                        placeholder="Pick a date"
                         type="date"
                         name="Due"
                         ref={register}

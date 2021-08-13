@@ -21,6 +21,8 @@ import logo from "../../../media/list.png";
 
 const url = BASE_URL + TOKEN_PATH;
 
+//Bruker yup som validation schema for forms.
+//Det viser en beskjed/error message når brukere ikke legger inn riktige values.
 const schema = yup.object().shape({
   identifier: yup.string().required("Please enter your username or email"),
   password: yup.string().required("Please enter your password"),
@@ -95,7 +97,7 @@ export default function LoginForm() {
                 )}
               </Form.Group>
 
-              <Button variant="outline-dark" type="submit" block>
+              <Button variant="outline-light" type="submit" block>
                 {submitting ? "Loggin in..." : "Login"}{" "}
               </Button>
             </fieldset>

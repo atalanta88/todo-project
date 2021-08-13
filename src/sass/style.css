@@ -23,6 +23,10 @@ body {
   color: white;
 }
 
+.add-todo-item-wrapper .form-label {
+  color: white;
+}
+
 .form-error {
   color: white;
   background-color: #ff3c38;
@@ -141,8 +145,7 @@ body {
   border-radius: 5px;
   margin: 0 auto;
   margin-top: 10%;
-  background-color: #f9fcff;
-  background-image: linear-gradient(147deg, #f9fcff 0%, #dee4ea 74%);
+  background-color: #212529;
 }
 
 .login-background img {
@@ -206,7 +209,7 @@ body {
   padding-top: 0% !important;
 }
 
-.btn {
-  margin-top: 10px;
+.login-background .btn {
+  margin-top: 15px;
 }
 /*# sourceMappingURL=style.css.map */

@@ -3,6 +3,7 @@ import useLocalStorage from "../hooks/useLocalStorage";
 
 const AuthContext = React.createContext([null, () => {}]);
 
+//Stores auth jwt token in local storage
 export const AuthProvider = (props) => {
   const [auth, setAuth] = useLocalStorage("auth", null);
   return (

@@ -17,10 +17,15 @@ body {
   color: white;
 }
 
-.add-todo-item-wrapper h1 {
-  margin-top: 30px;
-  margin-bottom: 20px;
-  color: white;
+.add-todo-item-wrapper {
+  h1 {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    color: white;
+  }
+  .form-label {
+    color: white;
+  }
 }
 
 .form-error {
