@@ -4,6 +4,7 @@ import ToDoItem from "./ToDoItem";
 import ErrorMessage from "../../common/ErrorMessage";
 import AuthContext from "../../context/AuthContext";
 import { useHistory } from "react-router-dom";
+import { BookLoaderComponent } from "../../common/Loader";
 
 const url = TODO_LIST;
 
@@ -12,6 +13,7 @@ function ToDoList() {
   const [TaskItems, setToDoList] = useState([]);
   const [error, setError] = useState(null);
   const [auth, setAuth] = useContext(AuthContext);
+  const [loading, setLoading] = useState(true);
   const history = useHistory();
 
   useEffect(function () {
@@ -32,6 +34,8 @@ function ToDoList() {
           }
         } catch (error) {
           setError(error.toString());
+        } finally {
+          setLoading(false);
         }
       }
     }
@@ -40,6 +44,9 @@ function ToDoList() {
 
   if (error) {
     return <ErrorMessage message={`Error: ${error}`} />;
+  }
+  if (loading) {
+    return <BookLoaderComponent />;
   }
 
   return (
