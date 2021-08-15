@@ -46,7 +46,7 @@ function ToDoItem({ Title, id, Due }) {
   const [auth, setAuth] = useContext(AuthContext);
   const token = auth.jwt;
 
-  //Brukeren kan slette en task ved å trykke på søppel ikonet.
+  //Brukeren kan slette en task ved å trykke på søppel ikonet. En popup vises der man blir spurt om man vil avbryte eller slette.
   function deletePost() {
     var ConfirmDelete = window.confirm("Delete the task?");
 
