@@ -5,15 +5,21 @@ import { SolarSystemLoading } from "react-loadingg";
 export const BookLoaderComponent = () => {
   return (
     <>
-      <SolarSystemLoading color="white" />
+      <div className="loader-background">
+        <SolarSystemLoading color="white" />
+      </div>
     </>
   );
 };
 
 export function Loader() {
   return (
-    <div className="d-flex justify-content-center">
-      <Spinner animation="grow" variant="info" />
-    </div>
+    <>
+      <div className="loader-background">
+        <div className="d-flex justify-content-center">
+          <Spinner animation="grow" variant="info" />
+        </div>
+      </div>
+    </>
   );
 }

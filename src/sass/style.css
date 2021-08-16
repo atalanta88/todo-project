@@ -229,6 +229,16 @@ body {
   }
 }
 
+.loader-background {
+  background: #212529;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+}
+
 .footer {
   background-color: #1f1f1f;
   -ms-flex-negative: 1;
